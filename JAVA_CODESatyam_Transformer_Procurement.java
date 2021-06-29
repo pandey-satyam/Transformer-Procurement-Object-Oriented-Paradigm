@@ -1,6 +1,6 @@
 /*code by Satyam Pandey*/
 //I have provided comments whereever necessary to decipher my code, the 
-code is executable
+//code is executable
 import java.util.*;
 import java.lang.*;
 import java.io.*;
@@ -10,77 +10,61 @@ import java.text.SimpleDateFormat;
 can be recognized by controlling station, the id will be specified by the 
 user */
 class Location {
- int identity;
- int rating;
- Location(int id, int rat) {
- identity=id;//Registered Id
- rating=rat;//in KVA
+        int identity;
+        int rating;
+        Location(int id, int rat) {
+        identity=id;//Registered Id
+        rating=rat;//in KVA
  }
  
- public static void main(String[] args) throws IOException, 
-ParseException{
- BufferedReader inp = new BufferedReader(new 
-InputStreamReader(System.in));
+public static void main(String[] args) throws IOException, ParseException{
+        BufferedReader inp = new BufferedReader(new 
+        InputStreamReader(System.in));
  //input reg id and rating of transformer
- int id= Integer.parseInt(inp.readLine());
- int rat= Integer.parseInt(inp.readLine()); 
+        int id= Integer.parseInt(inp.readLine());
+        int rat= Integer.parseInt(inp.readLine()); 
  /*for request to be valid here I am taking a condition for the 
 sake of understanding that id>=1&&id<=20000, we have only 20000 villages 
 currently registered*/
- System.out.println("Generate Request for Location ID: "+id+" for 
-procurement of transformer of "+rat+" KVA rating"); 
- Location a = new Location(id,rat);
- String reason=inp.readLine();//to Input your reason for 
-transformer amongst three categories storm, fault, relayfail, burnout 
-only if anything else will be given it will not be accepted
- System.out.println("Given Reason: "+reason);
- TransProc b = new TransProc(id,rat,reason);// Creating object of 
-Transformer Procurement authority class
- if(b.validregid()==true&&b.validreason()==true)
- {
- System.out.println("Your request for transformer procurement 
-is Valid and shall be processed soon");
- }
- else
- {
- System.out.println("Sorry! Our team found your request as 
-invalid and it will not be processed as of now");
- System.out.println("Now you need to seek approval from SDM, 
-please enter the date when last time transformer was installed in your 
-location: ");
- String datein=inp.readLine();//in dd/mm/yyyy format only 
- Date datefor=new 
-SimpleDateFormat("dd/MM/yyyy").parse(datein); 
- System.out.println(datein+"\t"+datefor); //in GMT
+        System.out.println("Generate Request for Location ID: "+id+" for procurement of transformer of "+rat+" KVA rating"); 
+        Location a = new Location(id,rat);
+        String reason=inp.readLine();//to Input your reason for transformer amongst three categories storm, fault, relayfail, burnout only if anything else will be given it will not be accepted
+        System.out.println("Given Reason: "+reason);
+        TransProc b = new TransProc(id,rat,reason);// Creating object of Transformer Procurement authority class
+        if(b.validregid()==true&&b.validreason()==true)
+          {
+              System.out.println("Your request for transformer procurement is Valid and shall be processed soon");
+          }
+        else
+          {
+              System.out.println("Sorry! Our team found your request as invalid and it will not be processed as of now");
+              System.out.println("Now you need to seek approval from SDM, please enter the date when last time transformer was installed in your location: ");
+              String datein=inp.readLine();//in dd/mm/yyyy format only 
+              Date datefor=new SimpleDateFormat("dd/MM/yyyy").parse(datein); 
+              System.out.println(datein+"\t"+datefor); //in GMT
  
- AdminApprov c= new AdminApprov(datein); if(c.Canapprove()==true)
- {
- System.out.println("Yes, Ministry has approved your 
-request because it was installed last time quite back, so your request 
-will be processed now!!");
- }
- else
- System.out.println("Sorry! Your request cant be processed 
-further as it is also rejected by ministry since it was installed within 
-2 years back only");
+              AdminApprov c= new AdminApprov(datein); 
+              if(c.Canapprove()==true)
+              {
+                 System.out.println("Yes, Ministry has approved your request because it was installed last time quite back, so your request will be processed now!!");
+              }
+              else
+                 System.out.println("Sorry! Your request cant be processed further as it is also rejected by ministry since it was installed within 2 years back only");
  
- }
+         }
  
  }
 }
 class TransProc {
- int regid;
- int reqrating;
- String reason;
- TransProc(int id, int reqrat, String reas) {
- regid=id;
- reqrating=reqrat;
- reason=reas;
- System.out.println("Request for Transformer Procurement Received, 
-Controlling Authority to attend the request for the following 
-specifications:\n"+"Location Reg ID: "+regid+"\n"+"Transformer Rating in 
-KVA: "+reqrating+"\n"+"Reason given by Location Incharge: "+reason);
- }
+          int regid;
+          int reqrating;
+          String reason;
+          TransProc(int id, int reqrat, String reas) {
+                   regid=id;
+                   reqrating=reqrat;
+                   reason=reas;
+          System.out.println("Request for Transformer Procurement Received, Controlling Authority to attend the request for the following specifications:\n"+"Location Reg ID: "+regid+"\n"+"Transformer Rating in KVA: "+reqrating+"\n"+"Reason given by Location Incharge: "+reason);
+                }
  boolean validregid()
  {
  
@@ -95,8 +79,7 @@ KVA: "+reqrating+"\n"+"Reason given by Location Incharge: "+reason);
  boolean validreason()
  {
  
-if(reason.equals("storm")||reason.equals("relayfail")||reason.equals("bur
-nout")||reason.equals("fault")||reason.equals("naturalhazard"))
+if(reason.equals("storm")||reason.equals("relayfail")||reason.equals("burnout")||reason.equals("fault")||reason.equals("naturalhazard"))
  return true;
  else
  return false;
@@ -129,5 +112,5 @@ class AdminApprov {
  
  
 }
-//end of progra
-}
+//end of program
+
